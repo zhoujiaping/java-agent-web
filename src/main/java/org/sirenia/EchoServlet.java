@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EchoServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	
+	static{
+		copy(new EchoServlet());
+	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
@@ -18,7 +20,7 @@ public class EchoServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		printHello(resp);
 	}
-	private EchoServlet copy(EchoServlet echo){
+	private static EchoServlet copy(EchoServlet echo){
 		return echo;
 	}
 	private void printHello(HttpServletResponse resp) throws IOException {
