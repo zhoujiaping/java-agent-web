@@ -18,6 +18,9 @@ public class EchoServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		printHello(resp);
 	}
+	private EchoServlet copy(EchoServlet echo){
+		return echo;
+	}
 	private void printHello(HttpServletResponse resp) throws IOException {
 		ClassLoader cl = this.getClass().getClassLoader();
 		Class<?> clClazz = cl.getClass();
