@@ -11,7 +11,6 @@ import org.apache.catalina.webresources.StandardRoot;
 
 public class TomcatStarter {
 	public static void main(String[] args) throws LifecycleException {
-		System.out.println(javassist.runtime.Desc.class.getName());
 		String webappDirLocation = "src/main/webapp/";
         Tomcat tomcat = new Tomcat();
         //The port that we should run on can be set into an environment variable
