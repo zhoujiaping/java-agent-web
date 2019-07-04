@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--以下所有pattern中输出的内容只包含了基本的信息，请根据需要进行扩展-->
+<included>
+	<property name="project.name" value="jsirenia" />
+	<property name="log.base" value="/logs/${project.name}" />
+	<property name="max.size" value="200MB" />
+	<jmxConfigurator />
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
+		<encoder>   
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>   
+		</encoder>   
+	</appender>
+	
+	<!--error日志-->
+	<appender name="ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">	
+		<File>${log.base}/${project.name}_error.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log.base}/${project.name}_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	       	 	<maxFileSize>${max.size}</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date [%thread] [%X{uid} - %X{url}]  %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--info日志-->
+	<appender name="INFO-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/${project.name}_info.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log.base}/${project.name}_info_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	       	 	<maxFileSize>${max.size}</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date [%thread] [%X{uid} - %X{url}] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--warn日志-->
+	<appender name="WARN-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/${project.name}_warn.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log.base}/${project.name}_warn_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	       	 	<maxFileSize>${max.size}</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date [%thread] [%X{uid} - %X{url}] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!--info 日志异步输出-->
+	<appender name ="ASYNC-INFO-APPENDER" class= "ch.qos.logback.classic.AsyncAppender"> 
+        <discardingThreshold>0</discardingThreshold> 
+        <queueSize>1024</queueSize> 
+        <appender-ref ref ="INFO-APPENDER" /> 
+    </appender>
+    
+    <!--warn 日志异步输出-->
+	<appender name ="ASYNC-WARN-APPENDER" class= "ch.qos.logback.classic.AsyncAppender"> 
+        <discardingThreshold>0</discardingThreshold> 
+        <queueSize>1024</queueSize> 
+        <appender-ref ref ="WARN-APPENDER" /> 
+    </appender>
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
+		<encoder>   
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>   
+		</encoder>   
+	</appender>
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ASYNC-INFO-APPENDER" />
+		<appender-ref ref="ASYNC-WARN-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</root>
+</included>
