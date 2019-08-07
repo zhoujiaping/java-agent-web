@@ -1,4 +1,4 @@
-package org.sirenia;
+package org.wt;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class TomcatStarter {
 	static{
-		System.setProperty("logback.configurationFile", "e:/logback.xml");
+		//System.setProperty("logback.configurationFile", "e:/logback.xml");
 	}
 	private static Logger logger = LoggerFactory.getLogger(TomcatStarter.class);
 
@@ -25,7 +25,7 @@ public class TomcatStarter {
 		// Look for that variable and default to 8081 if it isn't there.
 		String webPort = System.getenv("PORT");
 		if (webPort == null || webPort.isEmpty()) {
-			webPort = "8081";
+			webPort = "8083";
 		}
 
 		tomcat.setPort(Integer.valueOf(webPort));
@@ -40,7 +40,6 @@ public class TomcatStarter {
 		resources.addPreResources(
 				new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses.getAbsolutePath(), "/"));
 		ctx.setResources(resources);
-
 		tomcat.start();
 		logger.info("tomcat started at port：{}", webPort);
 		tomcat.getServer().await();

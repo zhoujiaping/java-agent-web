@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:dubbo-proxy="http://www.sf-pay.com/schema/dubbo-proxy"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:monitor="http://www.sf-pay.com/schema/monitor"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+">
+
+    <!-- 配置系统应用名称 -->
+    <dubbo:application name="java-agent-web"/>
+    <!-- 通过注册中心发现监控中心服务 -->
+    <dubbo:monitor protocol="registry"/>
+    <!-- 配置注册中心地址 -->
+    <dubbo:registry id="local" protocol="zookeeper" address="127.0.0.1:2181" timeout="200000" default="true"/>
+    
+    <!--dubbo 调用dubbo 端口　配置　-->
+    <dubbo:protocol name="http" port="8083" server="servlet" contextpath="java-agent-web/dubbo"/>
+    
+    <!-- 启动时不检查是否有可用服务 -->
+    <dubbo:consumer check="false"/>
+
+	 <!-- <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/> -->
+</beans> 
+
