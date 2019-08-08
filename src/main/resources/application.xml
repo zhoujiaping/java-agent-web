@@ -16,7 +16,8 @@
 			</list>
 		</property>
 	</bean>
-
+	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
+	<!-- <aop:aspectj-autoproxy/> -->
 	<!-- 激活annotation功能 -->
 	<context:annotation-config />
 	<!-- 激活annotation功能 -->

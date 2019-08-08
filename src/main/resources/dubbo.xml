@@ -21,6 +21,6 @@
     <!-- 启动时不检查是否有可用服务 -->
     <dubbo:consumer check="false"/>
 
-	 <!-- <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/> -->
+	 <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/>
 </beans> 
 
