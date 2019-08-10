@@ -22,10 +22,8 @@ public class AspectTest {
 
 	@Around("execution(* org.wt..*(..)) or execution(* com.sf..*(..))")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-		logger.info("groovyObject#invokeMethod");
-		Object target = joinPoint.getTarget();
-		Class<?> targetClass = AopUtils.getTargetClass(target);
-		System.out.println(targetClass.getName());
+		//Object target = joinPoint.getTarget();
+		//Class<?> targetClass = AopUtils.getTargetClass(target);
 		return joinPoint.proceed();
 	}
 
