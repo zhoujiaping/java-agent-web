@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.wt.service.HelloService;
-//@Service("helloService")
+@Service("helloService")
 //该lazy会失效，原因并不是被controller依赖，而是它是dubbo服务。
 @Lazy(true)
 public class HelloServiceImpl implements HelloService{
