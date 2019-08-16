@@ -18,7 +18,7 @@
     <dubbo:consumer check="false"/>
     <!--<dubbo:reference id="helloService" interface="org.wt.service.HelloService"/>-->
 
-    <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/>
+    <!-- <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/> -->
 
 </beans> 
 
