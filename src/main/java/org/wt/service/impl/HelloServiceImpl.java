@@ -16,7 +16,13 @@ public class HelloServiceImpl implements HelloService{
 	}
 	@Override
 	public String hello(String name) {
+		System.out.println("执行原方法hello(String name)");
 		return "hello "+name;
+	}
+	@Override
+	public String hello() {
+		System.out.println("执行原方法hello()");
+		return "hello()";
 	}
 
 }
