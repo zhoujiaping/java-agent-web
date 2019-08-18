@@ -25,6 +25,8 @@ public class HelloController {
 	@ResponseBody
 	@RequestMapping("/hello")
 	public Object hello(String name){
+		ClassLoader cxtCl= Thread.currentThread().getContextClassLoader();
+		System.out.println(cxtCl);
 		ClassLoader cl = Dog.class.getClassLoader();
 		System.out.println(cl);
 		return new Dog().wang(name);
