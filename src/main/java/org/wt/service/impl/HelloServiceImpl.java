@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.wt.Dog;
 import org.wt.service.HelloService;
 @Service("helloService")
 //该lazy会失效，原因并不是被controller依赖，而是它是dubbo服务。
@@ -16,6 +17,8 @@ public class HelloServiceImpl implements HelloService{
 		System.out.println(this.getClass().getName());
 		Method[] methods = this.getClass().getDeclaredMethods();
 		System.out.println(methods);
+		String res = new Dog().wang("xiaoming");
+		System.out.println(res);
 	}
 	@Override
 	public String hello(String name) {

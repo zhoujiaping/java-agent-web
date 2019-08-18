@@ -1,3 +1,4 @@
+/*
 package org.wt;
 
 import java.io.File;
@@ -25,7 +26,7 @@ public class TomcatStarter {
 		// Look for that variable and default to 8081 if it isn't there.
 		String webPort = System.getenv("PORT");
 		if (webPort == null || webPort.isEmpty()) { 
-			webPort = "8083";
+			webPort = "8080";
 		}
 
 		tomcat.setPort(Integer.valueOf(webPort));
@@ -45,3 +46,5 @@ public class TomcatStarter {
 		tomcat.getServer().await();
 	}
 }
+
+*/

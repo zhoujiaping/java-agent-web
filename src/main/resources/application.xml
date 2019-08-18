@@ -27,5 +27,5 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	<import resource="dubbo.xml"/>
+	<!--<import resource="dubbo.xml"/>-->
 </beans>
