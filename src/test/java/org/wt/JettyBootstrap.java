@@ -1,4 +1,3 @@
-/*
 package org.wt;
 
 import org.eclipse.jetty.server.Server;
@@ -24,4 +23,4 @@ public class JettyBootstrap {
         server.join();
     }
 }
-*/
+
