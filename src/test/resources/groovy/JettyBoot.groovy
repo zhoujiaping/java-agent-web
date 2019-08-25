@@ -1,4 +1,3 @@
-
 //groovy.grape.Grape.grab(group:'org.eclipse.jetty',module:'jetty-servlet',version:'9.4.12.RC2')
 //groovy.grape.Grape.grab(group:'org.eclipse.jetty',module:'jetty-webapp',version:'9.4.12.RC2')
 //@GrabResolver('http://nexus/content/repositories/central')
@@ -8,7 +7,6 @@
 //groovy.grape.Grape.grab('javax.annotation:javax.annotation-api:1.3')
 import org.eclipse.jetty.webapp.WebAppContext
 import org.eclipse.jetty.server.Server
-import org.wt.JettyGroovyBootstrap
 
 // 创建Server
 def server = new Server(8080);
@@ -20,25 +18,13 @@ while(!new File(projectRootFile,"pom.xml").exists()){
 
 def projectRoot = projectRootFile.getAbsolutePath()
 def webContext = new WebAppContext("${projectRoot}/src/main/webapp", "/");
-ClassLoader cl = new JettyGroovyBootstrap.MyClassLoader();
-webContext.setClassLoader(cl)
+
 //webContext.setDescriptor("${projectRoot}/src/main/webapp/WEB-INF/web.xml");
 //webContext.setResourceBase("${projectRoot}/src/main/webapp");
 //webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
 //server.setHandler(webContext);
 server.insertHandler(webContext);
 
-/*def cl = org.wt.Dog.class.getClassLoader()
-println cl
-def cxtCl = Thread.currentThread().getContextClassLoader()
-Thread.currentThread().setContextClassLoader(cxtCl)*/
-/*
-def c = Class.forName("org.wt.Dog",true,cl)
-c.metaClass.invokeMethod = {
-    name,args->
-        println "invoke....................."
-        name
-}*/
 server.stop();
 server.start();
 println "server start at port 8080"

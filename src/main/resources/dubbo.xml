@@ -9,16 +9,16 @@
     <!-- 配置系统应用名称 -->
     <dubbo:application name="java-agent-web"/>
     <!-- 配置注册中心地址 -->
-    <dubbo:registry id="local" protocol="zookeeper" address="127.0.0.1:2181" timeout="200000" default="true" check="false"/>
-    
+    <!--<dubbo:registry id="local" protocol="zookeeper" address="127.0.0.1:2181" timeout="200000" default="true" check="false"/>-->
+    <dubbo:registry address="N/A"/>
     <!--dubbo 调用dubbo 端口　配置　-->
-    <dubbo:protocol name="http" port="8083" server="servlet" contextpath="java-agent-web/dubbo" />
+    <dubbo:protocol name="http" host="127.0.0.1" port="8080" server="servlet" contextpath="java-agent-web/dubbo" />
     
     <!-- 启动时不检查是否有可用服务 -->
     <dubbo:consumer check="false"/>
     <!-- <dubbo:reference id="helloService" interface="org.wt.service.HelloService"/> -->
-
-    <dubbo:service interface="org.wt.service.HelloService" ref="helloService"/>
+    <dubbo:service interface="org.wt.service.UserService" ref="userService" />
+    <dubbo:reference interface="org.wt.service.RemoteUserService" id="remoteUserService" url="http://127.0.0.1:20880"/>
 
 </beans> 
 
