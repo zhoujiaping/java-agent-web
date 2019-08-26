@@ -10,27 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EchoServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	static{
-		copy(new EchoServlet());
-	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		throw new RuntimeException("post method is not supported!");
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		printHello(resp);
 	}
-	private static EchoServlet copy(EchoServlet echo){
-		return echo;
-	}
+
 	private void printHello(HttpServletResponse resp) throws IOException {
-		ClassLoader cl = this.getClass().getClassLoader();
-		Class<?> clClazz = cl.getClass();
-		Deprecated dep = clClazz.getAnnotation(Deprecated.class);
-		System.out.println(dep);
 		PrintWriter pw = resp.getWriter();
-		pw.print("hello");
-		//pw.print("groovy");
+		pw.print("get "+this.getClass().getName());
 		pw.flush();
 	}
 

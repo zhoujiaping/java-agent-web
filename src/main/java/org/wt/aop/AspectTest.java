@@ -20,7 +20,7 @@ public class AspectTest {
 		logger.info(this.getClass()+" init");
 	}
 
-	@Around("execution(* org.wt..*(..)) or execution(* com.sf..*(..))")
+	@Around("execution(* org.wt..*(..)) or execution(* com.wt2..*(..))")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		//Object target = joinPoint.getTarget();
 		//Class<?> targetClass = AopUtils.getTargetClass(target);
