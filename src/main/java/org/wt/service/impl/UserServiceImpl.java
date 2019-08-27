@@ -32,9 +32,7 @@ public class UserServiceImpl implements UserService {
 	public User login(String name, String password) {
 		return users.stream().filter(u->{
 			return Objects.equals(u.getName(),name) && Objects.equals(CryptUtils.enc(u.getPassword()),password);
-		}).findFirst().orElseThrow(()->{
-			throw new RuntimeException("user not found");
-		});
+		}).findFirst().orElse(new User("xxx","xxx","xxx"));
 	}
 
 
