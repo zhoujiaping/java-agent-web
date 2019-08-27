@@ -24,7 +24,7 @@ public class AspectTest {
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		//Object target = joinPoint.getTarget();
 		//Class<?> targetClass = AopUtils.getTargetClass(target);
-
+		logger.info("around "+joinPoint);
 		return joinPoint.proceed();
 	}
 

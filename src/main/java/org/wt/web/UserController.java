@@ -40,6 +40,7 @@ public class UserController {
 		res.put("msg","success");
 		res.put("whosyourdaddy",session.getAttribute("whosyourdaddy"));
 		res.put("user",user);
+		System.out.println(user.getName());
 		return res;
 	}
 	@ResponseBody
