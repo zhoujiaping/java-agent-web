@@ -1,4 +1,3 @@
-/*
 package org.wt;
 
 import java.io.File;
@@ -47,4 +46,3 @@ public class TomcatStarter {
 	}
 }
 
-*/
