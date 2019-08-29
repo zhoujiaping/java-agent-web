@@ -12,8 +12,6 @@ import java.io.File;
 public class JettyBootstrap {
     public static void main(String[] args) throws Exception {
         // 创建Server
-        ClassGenerator cg;
-        Wrapper w;
         Server server = new Server(8080);
         WebAppContext webContext = new WebAppContext("src/main/webapp", "/");
         //webContext.setDescriptor(projectRoot+"src/main/webapp/WEB-INF/web.xml");
