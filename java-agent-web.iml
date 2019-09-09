@@ -95,6 +95,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:9.4.12.RC2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:9.4.12.RC2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:9.4.12.RC2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.sirenia:java-agent:2.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.sirenia:java-agent:2.1.1-SNAPSHOT" level="project" />
   </component>
 </module>

@@ -1,11 +1,15 @@
+import groovy.transform.Field
 import org.aspectj.lang.ProceedingJoinPoint
 import com.alibaba.fastjson.JSONObject
 import org.wt.model.Order
 import org.wt.model.User
 
-//no def,and no type,the variable will be the binding variable.
-logger = org.slf4j.LoggerFactory.getLogger("MethodsLogger")
-def proxys = new Expando()
+
+//去binding，使用binding容易导致一系列问题。
+@Field logger = org.slf4j.LoggerFactory.getLogger("MethodsLogger")
+@Field proxys = [:]
+//def proxys = new Expando()
+@Field timestamp = System.currentTimeMillis()
 
 proxys."CryptUtils" = new Object(){
     def enc(data){
@@ -36,13 +40,13 @@ proxys."UserController" = new Object(){
 proxys."UserServiceImpl" = new Object(){
     def login(name,pwd){
         logger.info "$name $pwd"
-        new User(name:'baizhan',password:'987',nick:'')
+        new User(name:'baizhan',password:'987',nick:'monkey')
     }
 }
 
 proxys.RemoteUserService = new Object(){
     def login(name,pwd){
-        logger.info "$name $pwd 456xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        logger.info "$name $pwd 4501xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         //new User(name:'john',password:'987',nick:'')
         def userService = org.wt.context.AppContextHolder.appContext.getBean('userService')
         userService.login(name,pwd)
@@ -65,4 +69,4 @@ proxys.AspectTest = new Object(){
     }
 }
 
-return proxys
+return this

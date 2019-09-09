@@ -1,6 +1,5 @@
 package mock.agent
-
-//set the test case.
-caze = "default-caze"
-//caze = "another-caze"
-return this
+class MockCaze{
+    def caze = "default-caze"
+    def timestamp = System.currentTimeMillis()
+}

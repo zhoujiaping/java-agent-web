@@ -18,7 +18,8 @@ import org.sirenia.agent.JavaAgent
 class ClassProxy {
 
 	def logger = org.slf4j.LoggerFactory.getLogger('ClassProxyLogger')
-	def cl
+	def timestamp = System.currentTimeMillis()
+	def gcl
 	def shell
 	def methodSuffix = '_pxy'
 	def ivkName = AssistInvoker.class.name
@@ -27,17 +28,17 @@ class ClassProxy {
 	def cazeCache = new LastModCache()
 	def onMockCazeExpire = {
 		proxysCache = new LastModCache()
-		def newMockCaze = shell.evaluate(mockCazeFile)
+		def newMockCaze = gcl.parseClass(mockCazeFile).newInstance()
 		logger.info "change mock caze => from ${it?.obj?.caze} to ${newMockCaze.caze}"
 		newMockCaze
 	} as OnExpire
 	def pool
 
-	def init(ClassLoader cl0){
-		cl = cl0
+	def init(GroovyClassLoader gcl){
 		pool = ClassPool.getDefault()
-		pool.appendClassPath(new LoaderClassPath(cl))
-		shell = new GroovyShell(cl0)
+		pool.appendClassPath(new LoaderClassPath(gcl.parent))
+		this.gcl = gcl
+		shell = new GroovyShell(gcl.parent)
 	}
 
 	def proxy(String className, ProtectionDomain domain, byte[] bytes){
@@ -83,16 +84,17 @@ class ClassProxy {
 					}
 					newMethods
 				} as OnExpire
-				def proxys = proxysCache.get(methodsFile.getAbsolutePath(),onMethodsExpire)
+				def methods = proxysCache.get(methodsFile.getAbsolutePath(),onMethodsExpire)
+				def proxys = methods.proxys
 
 				def proxy
 				if(sn == 'InvokerInvocationHandler'){
 					def dubboHandlerFile = new File(JavaAgent.mockDir, "${mockCaze.caze}/InvokerInvocationHandler.groovy")
 					def onDubboHanlderExpire = {
-						shell.evaluate(dubboHandlerFile)
+						gcl.parseClass(dubboHandlerFile).newInstance()
 					} as OnExpire
 					def dubboHanlder = proxysCache.get(dubboHandlerFile.getAbsolutePath(),onDubboHanlderExpire)
-					dubboHanlder.proxys = proxys
+					dubboHanlder.init methods
 					proxy = dubboHanlder
 				}else{
 					if(!proxys[sn]){
